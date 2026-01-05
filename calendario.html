@@ -3,90 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Calendário</title>
+
 <style>
-  body {
-    margin: 0;
-    font-family: Cafe24 Syongsyong, sans-serif;
-    background: white;
-  }
+@font-face {
+  font-family: 'Cafe24Syongsyong';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/Cafe24Syongsyong.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  .calendar {
-    width: 260px;
-    padding: 12px;
-    box-sizing: border-box;
-  }
+body {
+  margin: 0;
+  background: white;
+  font-family: 'Cafe24Syongsyong', sans-serif;
+}
 
-  .month {
-    background: #DCA2A1;
-    text-align: center;
-    padding: 8px 0;
-    font-weight: bold;
-    color: black;
-  }
+.calendar {
+  width: 260px;
+  padding: 12px;
+  box-sizing: border-box;
+}
 
-  .weekdays, .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-  }
+.month {
+  background: #DCA2A1;
+  text-align: center;
+  padding: 8px 0;
+  font-weight: bold;
+  color: black;
+  letter-spacing: 1px;
+}
 
-  .weekdays div {
-    font-size: 12px;
-    margin-top: 8px;
-    color: black;
-  }
+.weekdays, .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
 
-  .days div {
-    padding: 6px 0;
-    font-size: 13px;
-    color: black;
-  }
+.weekdays div {
+  font-size: 12px;
+  margin-top: 8px;
+  color: black;
+}
 
-  .today {
-    background: #DCA2A1;
-    border-radius: 4px;
-    font-weight: bold;
-  }
+.days div {
+  padding: 6px 0;
+  font-size: 14px;
+  color: black;
+}
+
+.today {
+  background: #DCA2A1;
+  border-radius: 4px;
+  font-weight: bold;
+}
 </style>
 </head>
+
 <body>
 
 <div class="calendar">
   <div class="month" id="monthYear"></div>
+
   <div class="weekdays">
-    <div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
+    <div>D</div><div>S</div><div>T</div>
+    <div>Q</div><div>Q</div><div>S</div><div>S</div>
   </div>
+
   <div class="days" id="days"></div>
 </div>
 
 <script>
-  const today = new Date();
-  const monthYear = document.getElementById("monthYear");
-  const daysContainer = document.getElementById("days");
-
-  const months = [
-    "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
-    "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
-  ];
-
-  monthYear.textContent = `${months[today.getMonth()]} ${today.getFullYear()}`;
-
-  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
-  const lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-
-  for (let i = 0; i < firstDay; i++) {
-    daysContainer.appendChild(document.createElement("div"));
-  }
-
-  for (let d = 1; d <= lastDate; d++) {
-    const day = document.createElement("div");
-    day.textContent = d;
-    if (d === today.getDate()) {
-      day.classList.add("today");
-    }
-    daysContainer.appendChild(day);
-  }
-</script>
-
-</body>
-</html>
+const today = new Date();
+const monthYear = document.getElementById("monthYear");
+const daysContainer = doc

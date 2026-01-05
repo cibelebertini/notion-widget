@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Relógio</title>
+<style>
+  body {
+    margin: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .clock {
+    font-family: Arial, sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #FFBCD9;
+  }
+</style>
+</head>
+<body>
+
+<div class="clock" id="clock">00:00</div>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    document.getElementById("clock").textContent = `${hours}:${minutes}`;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>

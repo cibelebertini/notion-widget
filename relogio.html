@@ -3,38 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Relógio</title>
-<style>
-  body {
-    margin: 0;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
 
-  .clock {
-    font-family: Cafe24 Syongsyong, sans-serif;
-    font-size: 92px;
-    font-weight: bold;
-    color: #DCA2A1;
-  }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+
+.clock {
+  font-family: Cafe24 Syongsyong, sans-serif;
+  font-size: 96px;
+  font-weight: bold;
+  color: #DCA2A1;
+  padding: 4px;
+  line-height: 1;
+}
 </style>
 </head>
+
 <body>
 
 <div class="clock" id="clock">00:00</div>
 
 <script>
-  function updateClock() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    document.getElementById("clock").textContent = `${hours}:${minutes}`;
-  }
+function updateClock() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  document.getElementById("clock").textContent = `${hours}:${minutes}`;
+}
 
-  updateClock();
-  setInterval(updateClock, 1000);
+updateClock();
+setInterval(updateClock, 1000);
 </script>
 
 </body>

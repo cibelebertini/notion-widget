@@ -12,18 +12,33 @@
   font-style: normal;
 }
 
-body {
+/* BLOQUEIO DE TAMANHO (Notion-safe) */
+html, body {
+  width: 260px;
+  height: 300px;
   margin: 0;
+  padding: 0;
+  overflow: hidden;
   background: white;
-  font-family: 'Cafe24Syongsyong', sans-serif;
+}
+
+/* FONTE COM FALLBACK */
+body {
+  font-family: 'Cafe24Syongsyong',
+               'Comic Sans MS',
+               'Arial Rounded MT Bold',
+               Arial,
+               sans-serif;
 }
 
 .calendar {
   width: 260px;
+  height: 300px;
   padding: 12px;
   box-sizing: border-box;
 }
 
+/* CABEÇALHO DO MÊS */
 .month {
   background: #DCA2A1;
   text-align: center;
@@ -33,24 +48,28 @@ body {
   letter-spacing: 1px;
 }
 
+/* GRIDS */
 .weekdays, .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
 }
 
+/* DIAS DA SEMANA */
 .weekdays div {
   font-size: 12px;
   margin-top: 8px;
   color: black;
 }
 
+/* DIAS */
 .days div {
   padding: 6px 0;
   font-size: 14px;
   color: black;
 }
 
+/* DIA ATUAL */
 .today {
   background: #DCA2A1;
   border-radius: 4px;
@@ -75,4 +94,18 @@ body {
 <script>
 const today = new Date();
 const monthYear = document.getElementById("monthYear");
-const daysContainer = doc
+const daysContainer = document.getElementById("days");
+
+const months = [
+  "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+  "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
+];
+
+monthYear.textContent = `${months[today.getMonth()]} ${today.getFullYear()}`;
+
+const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+const lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+
+/* ESPAÇOS ANTES DO DIA 1 */
+for (let i = 0; i < firstDay; i++) {
+  d

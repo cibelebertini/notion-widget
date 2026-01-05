@@ -3,89 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <title>Calendário</title>
+
 <style>
-  body {
-    margin: 0;
-    font-family: Cafe24 Syongsyong, sans-serif;
-    background: white;
-  }
+@font-face {
+  font-family: 'Cafe24Syongsyong';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/Cafe24Syongsyong.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  .calendar {
-    width: 260px;
-    padding: 12px;
-    box-sizing: border-box;
-  }
+/* NÃO travar altura/largura */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
 
-  .month {
-    background: #FFBCD9;
-    text-align: center;
-    padding: 8px 0;
-    font-weight: bold;
-    color: black;
-  }
+body {
+  font-family: 'Cafe24Syongsyong', sans-serif;
+  display: inline-block; /* 🔑 faz o Notion ajustar o tamanho */
+}
 
-  .weekdays, .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-  }
+.calendar {
+  width: 260px;
+  padding: 8px;          /* margem menor */
+  box-sizing: border-box;
+}
 
-  .weekdays div {
-    font-size: 12px;
-    margin-top: 8px;
-    color: black;
-  }
+/* MÊS */
+.month {
+  background: #FFBCD9;
+  text-align: center;
+  padding: 6px 0;
+  font-weight: bold;
+  color: black;
+}
 
-  .days div {
-    padding: 6px 0;
-    font-size: 13px;
-    color: black;
-  }
+/* GRIDS */
+.weekdays, .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
 
-  .today {
-    background: #FFBCD9;
-    border-radius: 4px;
-    font-weight: bold;
-  }
+/* DIAS DA SEMANA */
+.weekdays div {
+  font-size: 12px;
+  margin-top: 6px;
+  color: black;
+}
+
+/* NÚMEROS */
+.days div {
+  padding: 4px 0;
+  font-size: 13px;
+  color: black;
+}
+
+/* DIA ATUAL */
+.today {
+  background: #FFBCD9;
+  border-radius: 4px;
+  font-weight: bold;
+}
 </style>
 </head>
+
 <body>
 
 <div class="calendar">
   <div class="month" id="monthYear"></div>
+
   <div class="weekdays">
-    <div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
+    <div>D</div><div>S</div><div>T</div>
+    <div>Q</div><div>Q</div><div>S</div><div>S</div>
   </div>
+
   <div class="days" id="days"></div>
 </div>
 
 <script>
-  const today = new Date();
-  const monthYear = document.getElementById("monthYear");
-  const daysContainer = document.getElementById("days");
+const today = new Date();
+const monthYear = document.getElementById("monthYear");
+const daysContainer = document.getElementById("days");
 
-  const months = [
-    "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
-    "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
-  ];
+const months = [
+  "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+  "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
+];
 
-  monthYear.textContent = `${months[today.getMonth()]} ${today.getFullYear()}`;
+monthYear.textContent = `${months[today.getMonth()]} ${today.getFullYear()}`;
 
-  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
-  const lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+const lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
 
-  for (let i = 0; i < firstDay; i++) {
-    daysContainer.appendChild(document.createElement("div"));
+/* espaços antes do dia 1 */
+for (let i = 0; i < firstDay; i++) {
+  daysContainer.appendChild(document.createElement("div"));
+}
+
+/* dias do mês */
+for (let d = 1; d <= lastDate; d++) {
+  const day = document.createElement("div");
+  day.textContent = d;
+
+  if (d === today.getDate()) {
+    day.classList.add("today");
   }
 
-  for (let d = 1; d <= lastDate; d++) {
-    const day = document.createElement("div");
-    day.textContent = d;
-    if (d === today.getDate()) {
-      day.classList.add("today");
-    }
-    daysContainer.appendChild(day);
-  }
+  daysContainer.appendChild(day);
+}
 </script>
 
 </body>
